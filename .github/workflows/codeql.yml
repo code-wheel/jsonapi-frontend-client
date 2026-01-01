@@ -31,3 +31,7 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        with:
+          # Match GitHub's default CodeQL category so results replace older
+          # "default setup" analyses and clear stale alerts.
+          category: "/language:javascript-typescript"
