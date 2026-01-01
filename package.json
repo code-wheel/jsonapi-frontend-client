@@ -1,14 +1,14 @@
 {
   "name": "@codewheel/jsonapi-frontend-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript client helpers for Drupal drupal/jsonapi_frontend",
-  "homepage": "https://github.com/CodeWheel-AI/jsonapi-frontend-client#readme",
+  "homepage": "https://github.com/code-wheel/jsonapi-frontend-client#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodeWheel-AI/jsonapi-frontend-client.git"
+    "url": "git+https://github.com/code-wheel/jsonapi-frontend-client.git"
   },
   "bugs": {
-    "url": "https://github.com/CodeWheel-AI/jsonapi-frontend-client/issues"
+    "url": "https://github.com/code-wheel/jsonapi-frontend-client/issues"
   },
   "keywords": [
     "drupal",
