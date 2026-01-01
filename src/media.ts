@@ -233,17 +233,54 @@ function getVideoEmbedUrl(url: string): string | undefined {
 }
 
 export function parseDrupalMediaTag(html: string): string | null {
-  const match = html.match(/data-entity-uuid=[\"']([^\"']+)[\"']/)
-  return match ? match[1] : null
+  const attr = "data-entity-uuid="
+  const start = html.indexOf(attr)
+  if (start === -1) {
+    return null
+  }
+
+  let index = start + attr.length
+  while (index < html.length && /\s/.test(html[index])) {
+    index += 1
+  }
+
+  const quote = html[index]
+  if (quote !== "\"" && quote !== "'") {
+    return null
+  }
+
+  const end = html.indexOf(quote, index + 1)
+  if (end === -1) {
+    return null
+  }
+
+  const uuid = html.slice(index + 1, end)
+  return uuid || null
 }
 
 export function extractEmbeddedMediaUuids(html: string): string[] {
-  const regex = /<drupal-media[^>]*data-entity-uuid=[\"']([^\"']+)[\"'][^>]*>/g
   const uuids: string[] = []
-  let match
+  const tagStart = "<drupal-media"
+  let index = 0
 
-  while ((match = regex.exec(html)) !== null) {
-    uuids.push(match[1])
+  while (index < html.length) {
+    const start = html.indexOf(tagStart, index)
+    if (start === -1) {
+      break
+    }
+
+    const end = html.indexOf(">", start)
+    if (end === -1) {
+      break
+    }
+
+    const tag = html.slice(start, end + 1)
+    const uuid = parseDrupalMediaTag(tag)
+    if (uuid) {
+      uuids.push(uuid)
+    }
+
+    index = end + 1
   }
 
   return uuids

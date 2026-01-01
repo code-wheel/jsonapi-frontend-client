@@ -67,9 +67,11 @@ export function getImageStyleUrl(originalUrl: string, style: string, options?: {
     return resolved.replace(/\/styles\/[^/]+\//, `/styles/${style}/`)
   }
 
-  const filesMatch = resolved.match(/(.+\/files\/)(.+)$/)
-  if (filesMatch) {
-    const [, basePath, filePath] = filesMatch
+  const marker = "/files/"
+  const markerIndex = resolved.indexOf(marker)
+  if (markerIndex !== -1) {
+    const basePath = resolved.slice(0, markerIndex + marker.length)
+    const filePath = resolved.slice(markerIndex + marker.length)
     return `${basePath}styles/${style}/public/${filePath}`
   }
 
