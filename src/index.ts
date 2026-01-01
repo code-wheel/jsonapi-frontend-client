@@ -1,5 +1,6 @@
 export { resolvePath } from "./resolve.js"
 export { fetchJsonApi, fetchView } from "./fetch.js"
+export { fetchRoutesPage, iterateRoutes, collectRoutes } from "./routes.js"
 
 export { getDrupalBaseUrl, resolveFileUrl, getFileUrl, getImageStyleUrl } from "./url.js"
 
@@ -17,6 +18,8 @@ export {
 
 export type {
   ResolveResponse,
+  RoutesFeedItem,
+  RoutesFeedResponse,
   JsonApiDocument,
   JsonApiResource,
   JsonApiRelationship,

@@ -65,6 +65,22 @@ await resolvePath("/about-us", {
 
 If you pass `Authorization` (or `Cookie`) headers, this client defaults to `cache: "no-store"` unless you explicitly set `options.init.cache`.
 
+## Static builds (SSG) routes feed (optional)
+
+If you enable the secret-protected routes feed in Drupal (`/jsonapi/routes`), you can fetch a complete build-time list of headless paths by following `links.next`:
+
+```ts
+import { collectRoutes } from "@codewheel/jsonapi-frontend-client"
+
+const baseUrl = process.env.DRUPAL_BASE_URL!
+const secret = process.env.ROUTES_FEED_SECRET!
+
+const routes = await collectRoutes({ baseUrl, secret })
+const paths = routes.map((r) => r.path)
+```
+
+Keep `ROUTES_FEED_SECRET` server-side only (build environment variables). Do not expose it to browsers.
+
 ## Query building (optional)
 
 This client doesn’t require a query builder, but `drupal-jsonapi-params` works well:

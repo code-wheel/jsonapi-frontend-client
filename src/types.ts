@@ -37,6 +37,29 @@ export type ResolveResponse =
       drupal_url: null
     }
 
+export type RoutesFeedItem =
+  | {
+      path: string
+      kind: "entity"
+      jsonapi_url: string
+      data_url: null
+    }
+  | {
+      path: string
+      kind: "view"
+      jsonapi_url: null
+      data_url: string
+    }
+
+export interface RoutesFeedResponse {
+  data: RoutesFeedItem[]
+  links?: {
+    self?: string
+    next?: string | null
+  }
+  meta?: Record<string, unknown>
+}
+
 export interface JsonApiDocument<T = JsonApiResource> {
   data: T | T[]
   included?: JsonApiResource[]
