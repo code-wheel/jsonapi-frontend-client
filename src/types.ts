@@ -26,6 +26,17 @@ export type ResolveResponse =
       drupal_url: string | null
     }
   | {
+      resolved: true
+      kind: "redirect"
+      canonical: string
+      entity: null
+      redirect: { to: string; status?: number }
+      jsonapi_url: null
+      data_url: null
+      headless: false
+      drupal_url: null
+    }
+  | {
       resolved: false
       kind: null
       canonical: null
